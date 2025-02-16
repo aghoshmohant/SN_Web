@@ -1,9 +1,11 @@
+/* Reset margin and padding for all elements */
 * {
     margin: 0;
     padding: 0;
     font-family: "Roboto", sans-serif;
 }
 
+/* Navigation bar styling */
 .nav {
     height: 75px;
     background-color: #AEFEB3;
@@ -19,17 +21,20 @@
     font-style: normal;
 }
 
+/* Logo styling */
 .logo {
     height: 30px;
     padding-right: 20px;
 }
 
+/* Back button icon styling */
 .back-icon {
     height: 50px;
     margin-left: 20px;
     cursor: pointer;
 }
 
+/* Main content area */
 .main {
     padding-top: 100px;
     padding-left: 15px;
@@ -38,6 +43,7 @@
     flex-direction: column;
 }
 
+/* Table styling */
 table {
     border: 1px solid black;
     width: 100%;
@@ -45,22 +51,26 @@ table {
     margin-top: 50px;
 }
 
+/* Table headers */
 th {
     width: 200px;
     height: 50px;
     border: 1px solid black;
 }
 
+/* Table cells */
 td {
     padding-left: 5px;
     border: 1px solid black;
 }
 
+/* Table rows */
 tr {
     height: 50px;
     border: 1px solid black;
 }
 
+/* Row colors */
 tr:nth-child(odd) {
     background-color: #BFF6C3;
 }
@@ -69,33 +79,63 @@ tr:nth-child(even) {
     background-color: #E0FBE2;
 }
 
+/* Page background color */
 body {
     background-color: #e7fbe8;
 }
 
+/* Title styling */
 .title {
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
 }
 
+/* Styling for approve, reject, and remove buttons */
 .approve-btn,
-.reject-btn {
-    width: 80px;
-    height: 30px;
+.reject-btn,
+.remove-btn,
+.approved-box {
+    width: 100px;   /* Set equal width */
+    height: 40px;   /* Set equal height */
     border: none;
-    background-color: rgb(15, 185, 15);
     font-size: 15px;
     font-weight: 500;
     border-radius: 3px;
-    color: black;
     cursor: pointer;
-    
+    display: inline-block; /* Align buttons and approved box */
+    text-align: center;
+    line-height: 40px; /* Center the text vertically */
 }
 
+/* Approve button color */
+.approve-btn {
+    background-color: rgb(15, 185, 15);
+    color: black;
+}
+
+/* Reject button color */
 .reject-btn {
     background-color: rgb(247, 28, 28);
-    margin-left: 5px;
+    color: black;
+    margin-top: 5px;
 }
 
+/* Remove button color (for approved orgs) */
+.remove-btn {
+    background-color: rgb(247, 28, 28);
+    color: black;
+    margin-top: 5px;
+}
+
+/* Approved status green box (same width and height as buttons) */
+.approved-box {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Hover effects for approve and reject buttons */
 .approve-btn:hover {
     background-color: green;
     box-shadow: 0.5px 0.5px 3px black;
@@ -106,4 +146,19 @@ body {
     background-color: rgb(194, 0, 0);
     box-shadow: 0.5px 0.5px 3px black;
     color: white;
+}
+
+/* Row hover effect */
+tr:hover {
+    background-color: #c3f2c1;
+}
+
+/* Adjust spacing for table cells */
+td, th {
+    text-align: center;
+    padding: 10px;
+}
+.social-media-link{
+    color: blue;
+    text-decoration: underline;
 }
