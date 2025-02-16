@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav{
+    height: 75px;
+    background-color: #AEFEB3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+    height: 30px;
+    padding-left: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.logout-icon{
+    height: 25px;
 }
 
-.App-link {
-  color: #61dafb;
+
+.logout-text{
+    font-size: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logout{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    cursor: pointer;
+}
+.body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding-top: 150px;
+    row-gap: 50px;
+    column-gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #e7fbe8;
+    padding-bottom: 50px;
+}
+
+.items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 0.5px solid rgb(13, 76, 2);
+    padding: 20px;
+    background-color: rgb(241, 255, 244);
+    border-radius: 5px;
+
+}
+
+.items:hover{
+    box-shadow: 1px 1px 20px rgb(0, 86, 20);
+    cursor: pointer;
+}
+
+.icon-box{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #AEFEB3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    width: 60%;
+
+}
+
+.icon-text{
+    font-size: 22px;
+    font-weight: 500;
+    padding-top: 15px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width:600px){
+    .main{
+        grid-template-columns: 1fr;
+    }
 }
