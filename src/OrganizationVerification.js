@@ -25,22 +25,26 @@ const OrganizationVerification = () => {
   }, []);
 
   const handleApprove = async (id) => {
-    try {
-      await axios.put(`http://192.168.215.52:5000/api/organization/approve/${id}`);
-      setOrganizations(prevOrgs => prevOrgs.filter(org => org.id !== id));
-      alert('Organization approved successfully.');
-    } catch (error) {
-      alert('Failed to approve organization.');
+    if (window.confirm('Are you sure you want to approve this organization?')) {
+      try {
+        await axios.put(`http://192.168.215.52:5000/api/organization/approve/${id}`);
+        setOrganizations((prevOrgs) => prevOrgs.filter((org) => org.id !== id));
+        alert('Organization approved successfully.');
+      } catch (error) {
+        alert('Failed to approve organization.');
+      }
     }
   };
 
   const handleReject = async (id) => {
-    try {
-      await axios.delete(`http://192.168.215.52:5000/api/organization/reject/${id}`);
-      setOrganizations(prevOrgs => prevOrgs.filter(org => org.id !== id));
-      alert('Organization rejected successfully.');
-    } catch (error) {
-      alert('Failed to reject organization.');
+    if (window.confirm('Are you sure you want to reject this organization?')) {
+      try {
+        await axios.delete(`http://192.168.215.52:5000/api/organization/reject/${id}`);
+        setOrganizations((prevOrgs) => prevOrgs.filter((org) => org.id !== id));
+        alert('Organization rejected successfully.');
+      } catch (error) {
+        alert('Failed to reject organization.');
+      }
     }
   };
 
@@ -69,7 +73,7 @@ const OrganizationVerification = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>Organization ID</th>
+                <th>No</th>
                 <th>Organization Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
@@ -91,7 +95,9 @@ const OrganizationVerification = () => {
                       <a href={org.social_media_link} target="_blank" rel="noopener noreferrer">
                         {org.social_media_link}
                       </a>
-                    ) : 'N/A'}
+                    ) : (
+                      'N/A'
+                    )}
                   </td>
                   <td>
                     <button onClick={() => handleApprove(org.id)} className="approve-btn">Approve</button>
