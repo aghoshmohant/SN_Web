@@ -11,6 +11,12 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import {
+    // ... other imports
+    IconButton, // Import IconButton
+    // ...
+  } from '@mui/material';
+  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const AuthorityProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -73,15 +79,31 @@ const AuthorityProfile = () => {
     if (reason === "clickaway") return;
     setSnackbarOpen(false);
   };
+  const handleLogout = () => {
+    setSnackbarMessage('Logout successful!');
+    setSnackbarSeverity('success');
+    setSnackbarOpen(true);
+    setTimeout(() => {
+     
+      window.location.href = '/'; 
+    }, 2000);
+  };
+  const handleBack = () => {
 
+    window.history.back();
+  };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: "#2E7D32" }}>
         <Toolbar>
+        <IconButton onClick={handleBack} color="inherit" aria-label="back"> {/* Back button */}
+              <ArrowBackIcon />
+            </IconButton>
           <Typography
             variant="h6"
             sx={{ fontWeight: "bold", color: "white", flexGrow: 1 }}
+            align="center"
           >
             Authority Profile
           </Typography>
@@ -215,6 +237,9 @@ const AuthorityProfile = () => {
                 Save Changes
               </Button>
             )}
+            <Button variant="contained" onClick={handleLogout} sx={{ backgroundColor: '#f44336', color: 'white' }}> {/* Red color for logout */}
+              Logout
+            </Button>
           </Box>
         </Box>
       </Container>
