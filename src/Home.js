@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
+import Profile from './icons/user.png'
 
 const Home = () => {
   return (
@@ -9,10 +10,10 @@ const Home = () => {
         <div>
           <img src="/assets/images/SafeNet.png" alt="logo" className="logo" />
         </div>
-        <Link to="/login">
+        <Link to="/profile">
           <div className="logout">
-            <img src="/assets/icons/logout.png" alt="logout" className="logout-icon" />
-            <p className="logout-text">Logout</p>
+            <img src={Profile} alt="logout" className="profile-icon" />
+          
           </div>
         </Link>
       </div>
