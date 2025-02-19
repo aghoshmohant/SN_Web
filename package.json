@@ -13,7 +13,10 @@
     "ajv": "^6.12.6",
     "ajv-keywords": "^3.5.2",
     "axios": "^1.7.9",
+<<<<<<< HEAD
     "lucide-react": "^0.475.0",
+=======
+>>>>>>> cf32a4f57ab329247606f138388c216e1278efb0
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
