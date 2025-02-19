@@ -8,6 +8,7 @@ import VolunteerCall from "./VolunteerCall"; // Import the new VolunteerCall com
 import VehicleCall from "./VehicleCall"; // Import the new VehicleCall component
 import ShelterDetails from './ShelterDetails';
 import RequirementItems from './RequirementItems';
+import Profile from './profile'
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/call-vehicle" element={<VehicleCall />} /> 
         <Route path="/shelter-details" element={<ShelterDetails />} />
         <Route path="/requirement-items" element={<RequirementItems />} />
+        <Route path="/profile" element={<Profile />} />
+
       </Routes>
     </Router>
   );
