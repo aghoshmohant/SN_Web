@@ -13,7 +13,11 @@ const VolunteerVerification = () => {
   const fetchVolunteers = async () => {
     try {
       const response = await axios.get("http://192.168.215.52:5000/api/volunteer/list");
-      setVolunteers(response.data);
+      // Filter out volunteers who are verified
+      const unapprovedVolunteers = response.data.filter(
+        (volunteer) => !volunteer.is_verified
+      );
+      setVolunteers(unapprovedVolunteers);
       setLoading(false);
     } catch (err) {
       setError(err.message || "An error occurred");
@@ -36,6 +40,30 @@ const VolunteerVerification = () => {
   const handleCloseModal = (e) => {
     e.stopPropagation();
     setSelectedImage(null);
+  };
+
+  const handleApprove = async (id) => {
+    if (window.confirm("Are you sure you want to approve this volunteer?")) {
+      try {
+        await axios.put(`http://192.168.215.52:5000/api/volunteer/approve/${id}`);
+        alert("Volunteer approved successfully!");
+        fetchVolunteers(); // Refresh the list to exclude approved volunteers
+      } catch (err) {
+        alert("Failed to approve volunteer");
+      }
+    }
+  };
+
+  const handleReject = async (id) => {
+    if (window.confirm("Are you sure you want to reject this volunteer?")) {
+      try {
+        await axios.delete(`http://192.168.215.52:5000/api/volunteer/reject/${id}`);
+        alert("Volunteer rejected successfully!");
+        fetchVolunteers(); // Refresh the list after rejection
+      } catch (err) {
+        alert("Failed to reject volunteer");
+      }
+    }
   };
 
   return (
@@ -75,7 +103,7 @@ const VolunteerVerification = () => {
             </thead>
             <tbody>
               {volunteers.map((volunteer, index) => (
-                <tr key={volunteer.id}>
+                <tr key={volunteer.volunteer_id}>
                   <td>{index + 1}</td>
                   <td>{volunteer.full_name}</td>
                   <td>{volunteer.email}</td>
@@ -96,8 +124,12 @@ const VolunteerVerification = () => {
                     )}
                   </td>
                   <td>
-                    <button className="approve-btn">Approve</button>
-                    <button className="reject-btn">Reject</button>
+                    <button className="approve-btn" onClick={() => handleApprove(volunteer.volunteer_id)}>
+                      Approve
+                    </button>
+                    <button className="reject-btn" onClick={() => handleReject(volunteer.volunteer_id)}>
+                      Reject
+                    </button>
                   </td>
                 </tr>
               ))}

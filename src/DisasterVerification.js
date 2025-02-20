@@ -12,11 +12,15 @@ const DisasterVerification = () => {
   // Function to fetch disaster data
   const fetchDisasters = async () => {
     try {
-      const response = await axios.get("http://192.168.215.52:5000/api/disaster");
+      const response = await axios.get("http://192.168.215.52:5000/api/disaster?verified=false");
       setDisasters(response.data.reverse());
       setLoading(false);
     } catch (err) {
-      setError(err.message || "An error occurred");
+      if (err.response && err.response.status === 404) {
+        setError("No disasters available for verification.");
+      } else {
+        setError("An error occurred while fetching disasters.");
+      }
       setLoading(false);
     }
   };
@@ -24,6 +28,28 @@ const DisasterVerification = () => {
   useEffect(() => {
     fetchDisasters();
   }, []);
+
+  // Function to approve a disaster
+  const handleApprove = async (id) => {
+    try {
+      await axios.put(`http://192.168.215.52:5000/api/disaster/approve/${id}`);
+      alert("Disaster approved successfully!");
+      fetchDisasters(); // Refresh the list
+    } catch (err) {
+      alert("Failed to approve disaster: " + err.message);
+    }
+  };
+
+  // Function to reject a disaster
+  const handleReject = async (id) => {
+    try {
+      await axios.delete(`http://192.168.215.52:5000/api/disaster/reject/${id}`);
+      alert("Disaster rejected successfully!");
+      fetchDisasters(); // Refresh the list
+    } catch (err) {
+      alert("Failed to reject disaster: " + err.message);
+    }
+  };
 
   // Function to handle button click to show the image in a modal
   const handleViewImage = (imageUrl) => {
@@ -54,7 +80,7 @@ const DisasterVerification = () => {
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
-          <p>Error: {error}</p>
+          <p>{error}</p>
         ) : disasters.length === 0 ? (
           <p>No disasters available for verification.</p>
         ) : (
@@ -91,8 +117,12 @@ const DisasterVerification = () => {
                     )}
                   </td>
                   <td>
-                    <button className="approve-btn">Approve</button>
-                    <button className="reject-btn">Reject</button>
+                    <button className="approve-btn" onClick={() => handleApprove(disaster.id)}>
+                      Approve
+                    </button>
+                    <button className="reject-btn" onClick={() => handleReject(disaster.id)}>
+                      Reject
+                    </button>
                   </td>
                 </tr>
               ))}
