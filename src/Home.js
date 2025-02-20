@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
-import Profile from './icons/user.png'
 
 const Home = () => {
   return (
@@ -12,7 +11,7 @@ const Home = () => {
         </div>
         <Link to="/profile">
           <div className="logout">
-            <img src={Profile} alt="logout" className="profile-icon" />
+            <img src="/assets/icons/volunteer.png" alt="logout" className="profile-icon" />
           
           </div>
         </Link>
