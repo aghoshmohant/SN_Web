@@ -121,7 +121,7 @@ const ShelterDetails = () => {
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        <Link to="/home">
           <div className="back">
             <img
               src="assets/icons/back-button.png"

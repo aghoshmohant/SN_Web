@@ -30,7 +30,7 @@ const VolunteerVerification = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const handleViewImage = (imageUrl) => {

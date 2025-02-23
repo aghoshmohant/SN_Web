@@ -7,7 +7,8 @@ const DisasterVerification = () => {
   const [disasters, setDisasters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // State for modal image
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedDescription, setSelectedDescription] = useState(null); // State for description modal
 
   // Function to fetch disaster data
   const fetchDisasters = async () => {
@@ -34,7 +35,7 @@ const DisasterVerification = () => {
     try {
       await axios.put(`http://192.168.215.52:5000/api/disaster/approve/${id}`);
       alert("Disaster approved successfully!");
-      fetchDisasters(); // Refresh the list
+      fetchDisasters();
     } catch (err) {
       alert("Failed to approve disaster: " + err.message);
     }
@@ -45,7 +46,7 @@ const DisasterVerification = () => {
     try {
       await axios.delete(`http://192.168.215.52:5000/api/disaster/reject/${id}`);
       alert("Disaster rejected successfully!");
-      fetchDisasters(); // Refresh the list
+      fetchDisasters();
     } catch (err) {
       alert("Failed to reject disaster: " + err.message);
     }
@@ -56,15 +57,21 @@ const DisasterVerification = () => {
     setSelectedImage(imageUrl);
   };
 
+  // Function to handle button click to show the description in a modal
+  const handleViewDescription = (description) => {
+    setSelectedDescription(description);
+  };
+
   // Function to close the modal
   const handleCloseModal = () => {
     setSelectedImage(null);
+    setSelectedDescription(null);
   };
 
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        <Link to="/home">
           <div className="back">
             <img src="assets/icons/back-button.png" alt="Back to Home" className="back-icon" />
           </div>
@@ -93,6 +100,7 @@ const DisasterVerification = () => {
                 <th>District</th>
                 <th>Date</th>
                 <th>Image</th>
+                <th>Description</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -108,9 +116,21 @@ const DisasterVerification = () => {
                     {disaster.image ? (
                       <button
                         className="view-image-btn"
-                        onClick={() => handleViewImage(disaster.image)} // Show image when button is clicked
+                        onClick={() => handleViewImage(disaster.image)}
                       >
                         View Image
+                      </button>
+                    ) : (
+                      "Not Available"
+                    )}
+                  </td>
+                  <td>
+                    {disaster.description ? (
+                      <button
+                        className="view-image-btn"
+                        onClick={() => handleViewDescription(disaster.description)}
+                      >
+                        View Description
                       </button>
                     ) : (
                       "Not Available"
@@ -138,6 +158,18 @@ const DisasterVerification = () => {
                 &times;
               </button>
               <img src={selectedImage} alt="Disaster" className="modal-image" />
+            </div>
+          </div>
+        )}
+
+        {/* Modal for showing the description */}
+        {selectedDescription && (
+          <div className="modal" onClick={handleCloseModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <button className="close-btn" onClick={handleCloseModal}>
+                &times;
+              </button>
+              <p className="modal-description">{selectedDescription}</p>
             </div>
           </div>
         )}

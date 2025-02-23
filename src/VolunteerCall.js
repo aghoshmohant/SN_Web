@@ -14,12 +14,13 @@ const VolunteerCall = () => {
     map_link: '',
     contact_number: '',
   });
-  const [volunteerCall, setvolunteerCall] = useState([]);
+  const [volunteerCall, setVolunteerCall] = useState([]);
+  const [loading, setLoading] = useState(false); // Loading state
 
   // Fetch volunteer calls from the backend
   useEffect(() => {
     axios.get('http://192.168.215.52:5000/api/call-volunteer')
-      .then((response) => setvolunteerCall(response.data))
+      .then((response) => setVolunteerCall(response.data))
       .catch((err) => console.error(err));
   }, []);
 
@@ -34,12 +35,12 @@ const VolunteerCall = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
+
     axios.post('http://192.168.215.52:5000/api/call-volunteer', formData)
       .then((response) => {
-        // Add new volunteer call to the list
-        setvolunteerCall([...volunteerCall, response.data]);
+        setVolunteerCall([...volunteerCall, response.data]); // Add new call
 
-        // Show success alert
         alert('Volunteer call created and data updated successfully!');
 
         // Reset the form
@@ -52,19 +53,21 @@ const VolunteerCall = () => {
           contact_number: '',
         });
 
-        // Close the popup
-        closePopup();
+        closePopup(); // Close popup
       })
       .catch((err) => {
         console.error(err);
         alert('Failed to create volunteer call. Please try again.');
+      })
+      .finally(() => {
+        setLoading(false); // End loading
       });
   };
 
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        <Link to="/home">
           <div className="back">
             <img
               src="assets/icons/back-button.png"
@@ -133,7 +136,19 @@ const VolunteerCall = () => {
               </div>
               <div>
                 <label htmlFor="role" className="lab">Role</label>
-                <input type="text" name="role" className="inp" value={formData.role} onChange={handleChange} />
+                <select
+                  name="role"
+                  className="inp"
+                  value={formData.role}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a role</option>
+                  <option value="First Responder">First Responder</option>
+                  <option value="Medical Volunteer">Medical Volunteer</option>
+                  <option value="Logistics Volunteer">Logistics Volunteer</option>
+                  <option value="Search and Rescue">Search and Rescue</option>
+                  <option value="Counseling Volunteer">Counseling Volunteer</option>
+                </select>
               </div>
               <div>
                 <label htmlFor="map_link" className="lab">Map Link</label>
@@ -143,7 +158,9 @@ const VolunteerCall = () => {
                 <label htmlFor="contact_number" className="lab">Contact Number</label>
                 <input type="text" name="contact_number" className="inp" value={formData.contact_number} onChange={handleChange} />
               </div>
-              <button type="submit" className="submit">Submit</button>
+              <button type="submit" className="submit" disabled={loading}>
+                {loading ? 'Submitting...' : 'Submit'}
+              </button>
             </form>
           </div>
         </div>

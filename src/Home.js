@@ -1,8 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if authToken exists in localStorage
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      // Redirect to login page if token is missing
+      navigate("/login");
+    }
+  }, [navigate]);
+
   return (
     <div>
       <div className="nav">
@@ -12,7 +23,6 @@ const Home = () => {
         <Link to="/profile">
           <div className="logout">
             <img src="/assets/icons/volunteer.png" alt="logout" className="profile-icon" />
-          
           </div>
         </Link>
       </div>

@@ -76,7 +76,7 @@ const VehicleCall = () => {
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        <Link to="/home">
           <div className="back">
             <img
               src="assets/icons/back-button.png"
@@ -149,7 +149,22 @@ const VehicleCall = () => {
               </div>
               <div>
                 <label htmlFor="vehicle_type" className="lab">Vehicle Type</label>
-                <input type="text" name="vehicle_type" className="inp" value={formData.vehicle_type} onChange={handleChange} />
+                <select
+                  name="vehicle_type"
+                  className="inp"
+                  value={formData.vehicle_type}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Vehicle Type</option>
+                  <option value="Ambulance">Ambulance</option>
+                  <option value="Fire Truck">Fire Truck</option>
+                  <option value="Rescue Vehicle">Rescue Vehicle</option>
+                  <option value="Utility Truck">Utility Truck</option>
+                  <option value="Water Tanker">Water Tanker</option>
+                  <option value="4x4 Off-road Vehicle">4x4 Off-road Vehicle</option>
+                  <option value="Logistics Vehicle">Logistics Vehicle</option>
+                  <option value="Command Vehicle">Command Vehicle</option>
+                </select>
               </div>
               <div>
                 <label htmlFor="map_link" className="lab">Map Link</label>

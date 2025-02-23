@@ -103,7 +103,7 @@ const RequirementItems = () => {
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        <Link to="/home">
           <div className="back">
             <img src="assets/icons/back-button.png" alt="home" className="back-icon" />
           </div>
