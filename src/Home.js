@@ -6,11 +6,10 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if authToken exists in localStorage
     const token = localStorage.getItem("authToken");
+
     if (!token) {
-      // Redirect to login page if token is missing
-      navigate("/login");
+      navigate("/"); // Redirect to login if no token
     }
   }, [navigate]);
 
@@ -20,11 +19,12 @@ const Home = () => {
         <div>
           <img src="/assets/images/SafeNet.png" alt="logo" className="logo" />
         </div>
-        <Link to="/profile">
-          <div className="logout">
-            <img src="/assets/icons/volunteer.png" alt="logout" className="profile-icon" />
-          </div>
-        </Link>
+        {/* Profile icon replacing logout */}
+        <div className="profile-icon-container">
+          <Link to="/profile">
+            <img src="/assets/icons/user.png" alt="Profile" className="profile-icon" />
+          </Link>
+        </div>
       </div>
 
       <div className="body">
@@ -104,6 +104,29 @@ const Home = () => {
             </div>
           </div>
         </Link>
+
+        <Link to="/contacts">
+          <div className="items">
+            <div className="icon-box">
+              <img src="/assets/icons/call.png" alt="requirement items" className="icon" />
+            </div>
+            <div className="icon-text">
+              <p>Emergency Contacts</p>
+            </div>
+          </div>
+        </Link>
+
+        <Link to="/bloodBanks">
+          <div className="items">
+            <div className="icon-box">
+              <img src="/assets/icons/blood-donation.png" alt="requirement items" className="icon" />
+            </div>
+            <div className="icon-text">
+              <p>Blood Bank</p>
+            </div>
+          </div>
+        </Link>
+
       </div>
     </div>
   );

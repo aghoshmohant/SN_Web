@@ -12,6 +12,8 @@ import Profile from './profile';
 import Login from "./Login";
 import Registration from "./Registration";
 import ProtectedRoute from "./ProtectedRoute";
+import Contacts from "./Contacts";
+import BloodBanks from "./BloodBanks";
 
 
 
@@ -35,8 +37,10 @@ function App() {
         <Route path="/call-vehicle" element={<VehicleCall />} /> 
         <Route path="/shelter-details" element={<ShelterDetails />} />
         <Route path="/requirement-items" element={<RequirementItems />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/" element={<Profile />} />
         <Route path="/register" element={<Registration />} />
+        <Route path ="/contacts" element={<Contacts/>}/>
+        <Route path="/bloodBanks" element={<BloodBanks/>}/>
 
       </Routes>
     </Router>

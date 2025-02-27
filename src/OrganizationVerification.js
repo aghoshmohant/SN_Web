@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 
@@ -7,6 +7,14 @@ const OrganizationVerification = () => {
   const [organizations, setOrganizations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   // Fetch only unverified organizations
   const fetchOrganizations = async () => {

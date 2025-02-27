@@ -1,13 +1,15 @@
-*{
+/* Global Styles */
+* {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  
+  box-sizing: border-box;
 }
 
-.nav{
+/* Navigation Bar */
+.nav {
   height: 75px;
-  background-color: #AEFEB3;
+  background-color: #B2DFDB; /* Light Green */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,32 +17,35 @@
   top: 0;
   left: 0;
   right: 0;
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-style: normal;
 }
 
-.logo{
+.logo {
   height: 30px;
   padding-left: 20px;
 }
 
-.profile-icon{
+.profile-icon {
   height: 50px;
 }
 
-
-.logout-text{
-  font-size: 20px;
+.profile-icon-container{
+  margin-right: 10px;
 }
 
-.logout{
+.logout {
   display: flex;
   align-items: center;
   padding-right: 20px;
   cursor: pointer;
 }
-.body{
+
+.logout-text {
+  font-size: 20px;
+}
+
+/* Body Layout */
+.body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding-top: 150px;
@@ -48,112 +53,387 @@
   column-gap: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #e7fbe8;
+  background-color: #E8F5E9; /* Very Light Green */
   padding-bottom: 50px;
 }
 
-.items{
+/* Items (Grid Cards) */
+.items {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 0.5px solid rgb(13, 76, 2);
+  border: 0.5px solid #388E3C; /* Green */
   padding: 20px;
-  background-color: rgb(241, 255, 244);
-  border-radius: 5px;
-
+  background-color: #F1F8E9; /* Lighter Green */
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.items:hover{
-  box-shadow: 1px 1px 20px rgb(0, 86, 20);
+.items:hover {
+  box-shadow: 1px 1px 20px #2E7D32; /* Darker Green */
   cursor: pointer;
 }
 
-.icon-box{
+
+/* Light Green Theme Palette */
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+/* Light Green Theme Palette */
+:root {
+  --light-green: #e6f3e6; /* Background */
+  --medium-green: #a3d9a5; /* Highlights */
+  --dark-green: #4caf50; /* Buttons and accents */
+  --text-dark: #2e7d32; /* Main text */
+  --error-red: #d32f2f; /* Error messages */
+  --shadow: rgba(0, 128, 0, 0.2); /* Subtle shadow */
+}
+
+/* Profile Wrapper */
+.head-profile-wrapper {
+  background-color: var(--light-green);
+  padding: 30px;
+  max-width: 700px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar */
+.head-profile-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+}
+
+.head-profile-back-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.head-profile-back-btn:hover {
+  color: var(--dark-green);
+}
+
+/* Titles */
+.head-profile-title {
+  color: var(--text-dark);
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.head-profile-password-title {
+  color: var(--text-dark);
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Loading and Error */
+.profile-loading {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-dark);
+}
+
+.head-profile-error {
+  color: var(--error-red);
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Profile Edit Form */
+.head-profile-edit-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.head-profile-field {
+  margin-bottom: 20px;
+}
+
+.head-profile-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.head-profile-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--medium-green);
+  border-radius: 6px;
+  background-color: var(--light-green);
+  transition: border-color 0.3s ease;
+}
+
+.head-profile-input:focus {
+  border-color: var(--dark-green);
+  outline: none;
+}
+
+.head-profile-input.head-profile-readonly {
+  background-color: #f0f7f0;
+  cursor: not-allowed;
+  color: #666;
+}
+
+/* Edit and Update Buttons */
+.head-profile-edit-btn,
+.head-profile-update-btn {
+  background-color: var(--dark-green);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.head-profile-edit-btn:hover,
+.head-profile-update-btn:hover {
+  background-color: #388e3c;
+  transform: scale(1.03);
+}
+
+/* Password Change Form */
+.head-profile-password-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  margin-top: 20px;
+}
+
+.head-profile-password-field {
+  margin-bottom: 20px;
+}
+
+.head-profile-password-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.head-profile-password-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--medium-green);
+  border-radius: 6px;
+  background-color: var(--light-green);
+  transition: border-color 0.3s ease;
+}
+
+.head-profile-password-input:focus {
+  border-color: var(--dark-green);
+  outline: none;
+}
+
+.head-profile-password-btn {
+  background-color: var(--dark-green);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.head-profile-password-btn:hover {
+  background-color: #388e3c;
+  transform: scale(1.03);
+}
+
+/* Logout Button at Bottom */
+.head-profile-logout-btn {
+  background-color: var(--error-red);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.head-profile-logout-btn:hover {
+  background-color: #b71c1c;
+  transform: scale(1.03);
+}
+
+/* Non-Editable Fields (View Mode) */
+.head-profile-field p {
+  font-size: 16px;
+  color: #333;
+  padding: 10px;
+  background-color: #f0f7f0;
+  border: 2px solid var(--medium-green);
+  border-radius: 6px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .head-profile-wrapper {
+    padding: 15px;
+  }
+
+  .head-profile-title {
+    font-size: 24px;
+  }
+
+  .head-profile-password-title {
+    font-size: 20px;
+  }
+
+  .head-profile-input,
+  .head-profile-password-input {
+    font-size: 14px;
+  }
+
+  .head-profile-edit-btn,
+  .head-profile-update-btn,
+  .head-profile-password-btn,
+  .head-profile-logout-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+/* Icons */
+.icon-box {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: #AEFEB3;
+  background-color: #C8E6C9; /* Soft Green */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.icon{
+.icon {
   width: 60%;
-
 }
 
-.icon-text{
+.icon-text {
   font-size: 22px;
   font-weight: 500;
   padding-top: 15px;
 }
 
-a{
+/* Links */
+a {
   text-decoration: none;
   color: black;
 }
 
+/* LOGIN PAGE STYLES */
 .unique-login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background: linear-gradient(135deg, #A5D6A7, #81C784, #A5D6A7);
   padding: 20px;
 }
 
 .unique-login-title {
   font-size: 2rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .unique-login-form {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #F1F8E9;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   padding: 2rem;
   width: 100%;
   max-width: 400px;
+  text-align: center;
 }
 
 .unique-form-group {
   margin-bottom: 1rem;
+  text-align: left;
 }
 
 .unique-label {
   font-weight: bold;
-  color: #555;
+  color: #2E7D32;
   display: block;
   margin-bottom: 0.5rem;
 }
 
 .unique-input {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  border: 1px solid #A5D6A7;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.unique-input:focus {
+  border-color: #388E3C;
+  outline: none;
+  box-shadow: 0 0 5px rgba(56, 142, 60, 0.5);
 }
 
 .unique-login-button {
-  background-color: #007bff;
+  background-color: #66BB6A;
   color: #fff;
-  padding: 0.8rem 1.2rem;
+  padding: 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   width: 100%;
   margin-top: 1rem;
-  transition: background-color 0.3s;
+  transition: background 0.3s ease-in-out;
 }
 
 .unique-login-button:hover {
-  background-color: #0056b3;
+  background-color: #43A047;
+}
+
+.unique-login-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .unique-error-message {
@@ -163,14 +443,31 @@ a{
   text-align: center;
 }
 
+.already-account-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #2E7D32; /* Light green/dark green as per your theme */
+}
+
+.already-account-text a {
+  color: #2E7D32;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.already-account-text a:hover {
+  text-decoration: underline;
+}
+
 .unique-register-text {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #555;
+  color: #2E7D32;
 }
 
 .unique-register-link {
-  color: #007bff;
+  color: #2E7D32;
   text-decoration: none;
   font-weight: bold;
 }
@@ -179,17 +476,10 @@ a{
   text-decoration: underline;
 }
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
+/* Loader Animation */
 .spinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
+  border-top: 4px solid #66BB6A;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -206,13 +496,13 @@ a{
   }
 }
 
-/* Container for the registration form */
+/* Registration Form */
 .registration-container-unique {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color: #F1F8E9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -221,7 +511,7 @@ a{
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #388E3C;
 }
 
 .registration-form-unique {
@@ -238,20 +528,20 @@ a{
 .form-group-unique label {
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
+  color: #2E7D32;
 }
 
 .form-group-unique input {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #A5D6A7;
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s;
 }
 
 .form-group-unique input:focus {
-  border-color: #007bff;
+  border-color: #388E3C;
 }
 
 .register-button-unique {
@@ -259,7 +549,7 @@ a{
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background-color: #007bff;
+  background-color: #66BB6A;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -270,7 +560,7 @@ a{
 }
 
 .register-button-unique:hover {
-  background-color: #0056b3;
+  background-color: #43A047;
 }
 
 .register-button-unique:disabled {
@@ -278,33 +568,13 @@ a{
   cursor: not-allowed;
 }
 
-.spinner-unique {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-  margin-left: 10px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .main {
+    grid-template-columns: 1fr;
   }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.message-unique {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin-top: 20px;
-}
-@media screen and (max-width:600px){
-  .main{
-      grid-template-columns: 1fr;
+  
+  .unique-login-form {
+    width: 90%;
   }
 }

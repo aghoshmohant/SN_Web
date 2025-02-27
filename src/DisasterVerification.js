@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
@@ -9,8 +9,16 @@ const DisasterVerification = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(null); // State for description modal
-
+  const navigate = useNavigate();
   // Function to fetch disaster data
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const fetchDisasters = async () => {
     try {
       const response = await axios.get("http://192.168.215.52:5000/api/disaster?verified=false");

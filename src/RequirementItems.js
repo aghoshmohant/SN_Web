@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './style.css';
 import './style2.css';
 
 const RequirementItems = () => {
+  const navigate = useNavigate();
   const [popupVisible, setPopupVisible] = useState(false);
   const [editPopupVisible, setEditPopupVisible] = useState(false);
   const [requirements, setRequirements] = useState([]);
@@ -26,8 +27,13 @@ const RequirementItems = () => {
 
   // Fetch requirements on component mount
   useEffect(() => {
-    fetchRequirements();
-  }, []);
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/");
+    } else {
+      fetchRequirements();
+    }
+  }, [navigate]);
 
   const fetchRequirements = async () => {
     try {

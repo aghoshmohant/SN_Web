@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./App.css";
 
 const Registration = () => {
@@ -127,7 +127,11 @@ const Registration = () => {
           />
         </div>
 
-        <button type="submit" className="register-button-unique" disabled={isSubmitting}>
+        <button
+          type="submit"
+          className="register-button-unique"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               Submitting...
@@ -139,6 +143,9 @@ const Registration = () => {
         </button>
       </form>
       {message && <p className="message-unique">{message}</p>}
+      <p className="already-account-text">
+        Already have an account? <Link to="/">Login</Link>
+      </p>
     </div>
   );
 };

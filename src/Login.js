@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import "./App.css"; // Updated file name for styles
+import "./App.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // New state for loading
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      navigate("/home"); // Redirect if already logged in
+    }
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true); // Show loading when login is submitted
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -22,7 +29,8 @@ const Login = () => {
       );
 
       if (response.data.message === "Login successful") {
-        localStorage.setItem("authToken", response.data.token); // Store JWT token
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("districtHeadId", response.data.id || response.data.user?.id); // Store the ID
         navigate("/home");
       } else {
         setError(response.data.message || "Invalid credentials");
@@ -30,7 +38,7 @@ const Login = () => {
     } catch (err) {
       setError(err.response?.data?.error || "An error occurred during login");
     } finally {
-      setLoading(false); // Stop loading once the request is done
+      setLoading(false);
     }
   };
 
@@ -63,16 +71,9 @@ const Login = () => {
         <button
           type="submit"
           className="unique-login-button"
-          disabled={loading} // Disable button while loading
+          disabled={loading}
         >
-          {loading ? (
-            <>
-              Logging in...
-              <div className="spinner spinner-inside-button"></div> {/* Spinner inside button */}
-            </>
-          ) : (
-            "Login"
-          )}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
       {error && <p className="unique-error-message">{error}</p>}
