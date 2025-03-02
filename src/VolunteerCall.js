@@ -14,54 +14,60 @@ const VolunteerCall = () => {
     map_link: '',
     contact_number: '',
   });
-  const [volunteerCall, setVolunteerCall] = useState([]);
-  const [loading, setLoading] = useState(false); // Loading state
+  const [volunteerCalls, setVolunteerCalls] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  // Fetch volunteer calls from the backend
   useEffect(() => {
-    axios.get('http://192.168.215.52:5000/api/call-volunteer')
-      .then((response) => setVolunteerCall(response.data))
-      .catch((err) => console.error(err));
+    axios.get('http://localhost:5000/api/call-volunteer')
+      .then((response) => setVolunteerCalls(response.data))
+      .catch((err) => setError('Failed to fetch volunteer calls.'));
   }, []);
 
   const openPopup = () => setPopupVisible(true);
-  const closePopup = () => setPopupVisible(false);
+  const closePopup = () => {
+    setPopupVisible(false);
+    setFormData({
+      location: '',
+      district: '',
+      count: '',
+      role: '',
+      map_link: '',
+      contact_number: '',
+    });
+    setError('');
+    setSuccessMessage('');
+  };
 
-  // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
+    setError('');
+    setSuccessMessage('');
 
-    axios.post('http://192.168.215.52:5000/api/call-volunteer', formData)
-      .then((response) => {
-        setVolunteerCall([...volunteerCall, response.data]); // Add new call
-
-        alert('Volunteer call created and data updated successfully!');
-
-        // Reset the form
-        setFormData({
-          location: '',
-          district: '',
-          count: '',
-          role: '',
-          map_link: '',
-          contact_number: '',
-        });
-
-        closePopup(); // Close popup
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('Failed to create volunteer call. Please try again.');
-      })
-      .finally(() => {
-        setLoading(false); // End loading
+    try {
+      const response = await axios.post('http://localhost:5000/api/call-volunteer', formData);
+      setVolunteerCalls([...volunteerCalls, response.data]);
+      setSuccessMessage('Volunteer call registered successfully!');
+      setFormData({
+        location: '',
+        district: '',
+        count: '',
+        role: '',
+        map_link: '',
+        contact_number: '',
       });
+    } catch (err) {
+      setError('Failed to register volunteer call. Please try again.');
+    } finally {
+      setLoading(false);
+      closePopup();
+    }
   };
 
   return (
@@ -69,11 +75,7 @@ const VolunteerCall = () => {
       <div className="nav">
         <Link to="/home">
           <div className="back">
-            <img
-              src="assets/icons/back-button.png"
-              alt="home"
-              className="back-icon"
-            />
+            <img src="assets/icons/back-button.png" alt="home" className="back-icon" />
           </div>
         </Link>
         <div>
@@ -82,8 +84,12 @@ const VolunteerCall = () => {
       </div>
 
       <div className="main">
-        <h1 className="title">Call for Volunteer</h1>
+        <h1 className="title">Call for Volunteers</h1>
         <button className="btn" onClick={openPopup}>New</button>
+
+        {error && <div className="error-message">{error}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>}
+
         <table className="table">
           <thead>
             <tr>
@@ -94,11 +100,12 @@ const VolunteerCall = () => {
               <th>Role</th>
               <th>Map Link</th>
               <th>Contact No</th>
+              <th>Remaining Volunteers</th>
             </tr>
           </thead>
           <tbody>
-            {volunteerCall.map((call, index) => (
-              <tr key={index}>
+            {volunteerCalls.map((call, index) => (
+              <tr key={call.id}>
                 <td>{index + 1}</td>
                 <td>{call.location}</td>
                 <td>{call.district}</td>
@@ -106,6 +113,7 @@ const VolunteerCall = () => {
                 <td>{call.role}</td>
                 <td><a href={call.map_link} target="_blank" rel="noreferrer">Map</a></td>
                 <td>{call.contact_number}</td>
+                <td>{call.remaining_volunteers}</td>
               </tr>
             ))}
           </tbody>
@@ -115,12 +123,7 @@ const VolunteerCall = () => {
       {popupVisible && (
         <div className="body1" id="popupOverlay" style={{ display: 'flex' }}>
           <div className="box">
-            <img
-              src="./assets/icons/close.png"
-              alt="Close"
-              className="close"
-              onClick={closePopup}
-            />
+            <img src="./assets/icons/close.png" alt="Close" className="close" onClick={closePopup} />
             <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="location" className="lab">Location</label>
@@ -136,19 +139,7 @@ const VolunteerCall = () => {
               </div>
               <div>
                 <label htmlFor="role" className="lab">Role</label>
-                <select
-                  name="role"
-                  className="inp"
-                  value={formData.role}
-                  onChange={handleChange}
-                >
-                  <option value="">Select a role</option>
-                  <option value="First Responder">First Responder</option>
-                  <option value="Medical Volunteer">Medical Volunteer</option>
-                  <option value="Logistics Volunteer">Logistics Volunteer</option>
-                  <option value="Search and Rescue">Search and Rescue</option>
-                  <option value="Counseling Volunteer">Counseling Volunteer</option>
-                </select>
+                <input type="text" name="role" className="inp" value={formData.role} onChange={handleChange} />
               </div>
               <div>
                 <label htmlFor="map_link" className="lab">Map Link</label>

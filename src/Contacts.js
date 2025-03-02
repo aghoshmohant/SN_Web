@@ -117,7 +117,7 @@ const Contacts = () => {
       </div>
 
       <div className="main">
-        <h1 className="title">Contact Items</h1>
+        <h1 className="title">Emergency Contacts</h1>
         <button className="btn" onClick={openPopup}>New</button>
 
         <table className="table">
