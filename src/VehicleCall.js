@@ -21,7 +21,7 @@ const VehicleCall = () => {
 
   // Fetch vehicle calls from the backend
   useEffect(() => {
-    axios.get('http://192.168.215.52:5000/api/call-vehicle')
+    axios.get('http://localhost:5000/api/call-vehicle')
       .then((response) => setVehicleCalls(response.data))
       .catch((err) => setError('Failed to fetch vehicle calls.'));
   }, []);
@@ -54,7 +54,7 @@ const VehicleCall = () => {
     setSuccessMessage('');
 
     try {
-      const response = await axios.post('http://192.168.215.52:5000/api/call-vehicle', formData);
+      const response = await axios.post('http://localhost:5000/api/call-vehicle', formData);
       setVehicleCalls([...vehicleCalls, response.data]);
       setSuccessMessage('Vehicle call registered successfully!');
       setFormData({
@@ -107,6 +107,7 @@ const VehicleCall = () => {
               <th>Vehicle Type</th>
               <th>Map Link</th>
               <th>Contact No</th>
+              <th>Remaining Vehicles</th> {/* Added new column */}
             </tr>
           </thead>
           <tbody>
@@ -119,6 +120,7 @@ const VehicleCall = () => {
                 <td>{call.vehicle_type}</td>
                 <td><a href={call.map_link} target="_blank" rel="noreferrer">Map</a></td>
                 <td>{call.contact_number}</td>
+                <td>{call.remaining_vehicles}</td> {/* Added new column data */}
               </tr>
             ))}
           </tbody>

@@ -34,7 +34,7 @@ const BloodBanks = () => {
 
   const fetchBloodBanks = async () => {
     try {
-      const response = await axios.get('http://192.168.215.52:5000/api/blood-banks');
+      const response = await axios.get('http://localhost:5000/api/blood-banks');
       setBloodBanks(response.data.reverse());
     } catch (error) {
       console.error('Error fetching blood banks:', error);
@@ -67,7 +67,7 @@ const BloodBanks = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://192.168.215.52:5000/api/blood-banks', formData);
+      await axios.post('http://localhost:5000/api/blood-banks', formData);
       alert('Blood bank added successfully!');
       fetchBloodBanks(); // Refresh the table
       closePopup(); // Close popup after submission
@@ -80,7 +80,7 @@ const BloodBanks = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://192.168.215.52:5000/api/blood-banks/${editFormData.id}`, editFormData);
+      await axios.put(`http://localhost:5000/api/blood-banks/${editFormData.id}`, editFormData);
       alert('Blood bank updated successfully!');
       fetchBloodBanks(); // Refresh the table
       closeEditPopup(); // Close edit popup after submission
@@ -93,7 +93,7 @@ const BloodBanks = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this blood bank?')) {
       try {
-        await axios.delete(`http://192.168.215.52:5000/api/blood-banks/${id}`);
+        await axios.delete(`http://localhost:5000/api/blood-banks/${id}`);
         alert('Blood bank deleted successfully!');
         fetchBloodBanks(); // Refresh the table after deletion
       } catch (error) {

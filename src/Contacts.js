@@ -32,7 +32,7 @@ const Contacts = () => {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get('http://192.168.215.52:5000/api/contacts');
+      const response = await axios.get('http://localhost:5000/api/contacts');
       setContacts(response.data.reverse());
     } catch (error) {
       console.error('Error fetching contacts:', error);
@@ -64,7 +64,7 @@ const Contacts = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://192.168.215.52:5000/api/contacts', formData);
+      await axios.post('http://localhost:5000/api/contacts', formData);
       alert('Contact added successfully!');
       fetchContacts(); // Refresh the table
       closePopup(); // Close popup after submission
@@ -77,7 +77,7 @@ const Contacts = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://192.168.215.52:5000/api/contacts/${editFormData.id}`, {
+      await axios.put(`http://localhost:5000/api/contacts/${editFormData.id}`, {
         name: editFormData.name,
         number: editFormData.number,
       });
@@ -93,7 +93,7 @@ const Contacts = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this contact?')) {
       try {
-        await axios.delete(`http://192.168.215.52:5000/api/contacts/${id}`);
+        await axios.delete(`http://localhost:5000/api/contacts/${id}`);
         alert('Contact deleted successfully!');
         fetchContacts(); // Refresh the table after deletion
       } catch (error) {

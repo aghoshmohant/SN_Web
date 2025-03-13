@@ -14,6 +14,7 @@ import Registration from "./Registration";
 import ProtectedRoute from "./ProtectedRoute";
 import Contacts from "./Contacts";
 import BloodBanks from "./BloodBanks";
+import AcceptedVolunteers from "./AcceptedVolunteers";
 
 
 
@@ -41,6 +42,8 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path ="/contacts" element={<Contacts/>}/>
         <Route path="/bloodBanks" element={<BloodBanks/>}/>
+        <Route path="/AcceptedVolunteers" element={<AcceptedVolunteers/>}/>
+        
 
       </Routes>
     </Router>

@@ -21,7 +21,7 @@ const DisasterVerification = () => {
 
   const fetchDisasters = async () => {
     try {
-      const response = await axios.get("http://192.168.215.52:5000/api/disaster?verified=false");
+      const response = await axios.get("http://localhost:5000/api/disaster?verified=false");
       setDisasters(response.data.reverse());
       setLoading(false);
     } catch (err) {
@@ -41,7 +41,7 @@ const DisasterVerification = () => {
   // Function to approve a disaster
   const handleApprove = async (id) => {
     try {
-      await axios.put(`http://192.168.215.52:5000/api/disaster/approve/${id}`);
+      await axios.put(`http://localhost:5000/api/disaster/approve/${id}`);
       alert("Disaster approved successfully!");
       fetchDisasters();
     } catch (err) {
@@ -52,7 +52,7 @@ const DisasterVerification = () => {
   // Function to reject a disaster
   const handleReject = async (id) => {
     try {
-      await axios.delete(`http://192.168.215.52:5000/api/disaster/reject/${id}`);
+      await axios.delete(`http://localhost:5000/api/disaster/reject/${id}`);
       alert("Disaster rejected successfully!");
       fetchDisasters();
     } catch (err) {

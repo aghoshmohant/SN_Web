@@ -24,7 +24,7 @@ const ShelterDetails = () => {
   useEffect(() => {
     const fetchCamps = async () => {
       try {
-        const response = await axios.get('http://192.168.215.52:5000/api/camps');
+        const response = await axios.get('http://localhost:5000/api/camps');
         setCamps(response.data.reverse());
       } catch (error) {
         console.error('Error fetching camps:', error);
@@ -69,7 +69,7 @@ const ShelterDetails = () => {
     try {
       if (editMode && editPeopleOnly) {
         // Update only the current people count
-        const response = await axios.put(`http://192.168.215.52:5000/api/camps/${editCampId}/people`, {
+        const response = await axios.put(`http://localhost:5000/api/camps/${editCampId}/people`, {
           current_people: formData.current_people,
         });
         if (response.status === 200) {
@@ -79,7 +79,7 @@ const ShelterDetails = () => {
         }
       } else if (editMode) {
         // Update all fields
-        const response = await axios.put(`http://192.168.215.52:5000/api/camps/${editCampId}`, formData);
+        const response = await axios.put(`http://localhost:5000/api/camps/${editCampId}`, formData);
         if (response.status === 200) {
           const updatedCamp = response.data;
           setCamps(camps.map((camp) => (camp.id === editCampId ? updatedCamp : camp)));
@@ -87,7 +87,7 @@ const ShelterDetails = () => {
         }
       } else {
         // Add new camp
-        const response = await axios.post('http://192.168.215.52:5000/api/camps', formData);
+        const response = await axios.post('http://localhost:5000/api/camps', formData);
         if (response.status === 200 || response.status === 201) {
           const newCamp = response.data;
           setCamps([...camps, newCamp]);
@@ -107,7 +107,7 @@ const ShelterDetails = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await axios.delete(`http://192.168.215.52:5000/api/camps/${id}`);
+      const response = await axios.delete(`http://localhost:5000/api/camps/${id}`);
       if (response.status === 200) {
         setCamps(camps.filter((camp) => camp.id !== id));
         alert('Successfully deleted');

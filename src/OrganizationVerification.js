@@ -19,7 +19,7 @@ const OrganizationVerification = () => {
   // Fetch only unverified organizations
   const fetchOrganizations = async () => {
     try {
-      const response = await axios.get('http://192.168.215.52:5000/api/organization?verified=false');
+      const response = await axios.get('http://localhost:5000/api/organization?verified=false');
       setOrganizations(response.data.reverse());
     } catch (error) {
       setError(error.response?.data?.message || 'Failed to fetch organizations.');
@@ -35,7 +35,7 @@ const OrganizationVerification = () => {
   const handleApprove = async (id) => {
     if (window.confirm('Are you sure you want to approve this organization?')) {
       try {
-        await axios.put(`http://192.168.215.52:5000/api/organization/approve/${id}`);
+        await axios.put(`http://localhost:5000/api/organization/approve/${id}`);
         setOrganizations((prevOrgs) => prevOrgs.filter((org) => org.id !== id));
         alert('Organization approved successfully.');
       } catch (error) {
@@ -47,7 +47,7 @@ const OrganizationVerification = () => {
   const handleReject = async (id) => {
     if (window.confirm('Are you sure you want to reject this organization?')) {
       try {
-        await axios.delete(`http://192.168.215.52:5000/api/organization/reject/${id}`);
+        await axios.delete(`http://localhost:5000/api/organization/reject/${id}`);
         setOrganizations((prevOrgs) => prevOrgs.filter((org) => org.id !== id));
         alert('Organization rejected successfully.');
       } catch (error) {

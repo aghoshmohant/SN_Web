@@ -37,7 +37,7 @@ const RequirementItems = () => {
 
   const fetchRequirements = async () => {
     try {
-      const response = await axios.get('http://192.168.215.52:5000/api/requirements');
+      const response = await axios.get('http://localhost:5000/api/requirements');
       setRequirements(response.data.reverse());
     } catch (error) {
       console.error('Error fetching requirements:', error);
@@ -68,7 +68,7 @@ const RequirementItems = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://192.168.215.52:5000/api/requirements', formData);
+      await axios.post('http://localhost:5000/api/requirements', formData);
       alert('Requirement item created successfully!');
       fetchRequirements(); // Refresh the table
       closePopup(); // Close popup after submission
@@ -81,7 +81,7 @@ const RequirementItems = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://192.168.215.52:5000/api/requirements/${editFormData.id}`, {
+      await axios.put(`http://localhost:5000/api/requirements/${editFormData.id}`, {
         quantity: editFormData.quantity
       });
       alert('Quantity updated successfully!');
@@ -96,7 +96,7 @@ const RequirementItems = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {
-        await axios.delete(`http://192.168.215.52:5000/api/requirements/${id}`);
+        await axios.delete(`http://localhost:5000/api/requirements/${id}`);
         alert('Requirement item deleted successfully!');
         fetchRequirements(); // Refresh the table after deletion
       } catch (error) {
